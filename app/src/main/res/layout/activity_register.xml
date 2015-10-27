@@ -8,7 +8,7 @@
     tools:context="com.version1.andreascrona.memories.RegisterActivity">
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
@@ -16,10 +16,10 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="103dp"
-        android:text="@string/username" />
+        android:hint="@string/username" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
@@ -27,10 +27,10 @@
         android:layout_below="@+id/usernameTxt"
         android:layout_alignRight="@+id/usernameTxt"
         android:layout_alignEnd="@+id/usernameTxt"
-        android:text="@string/email" />
+        android:hint="@string/email" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
@@ -38,10 +38,10 @@
         android:layout_below="@+id/emailTxt"
         android:layout_alignLeft="@+id/emailTxt"
         android:layout_alignStart="@+id/emailTxt"
-        android:text="@string/password" />
+        android:hint="@string/password" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
@@ -49,10 +49,10 @@
         android:layout_below="@+id/passwordTxt"
         android:layout_alignRight="@+id/passwordTxt"
         android:layout_alignEnd="@+id/passwordTxt"
-        android:text="@string/repassword" />
+        android:hint="@string/repassword" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/title_activity_register"
         android:id="@+id/register_btn"

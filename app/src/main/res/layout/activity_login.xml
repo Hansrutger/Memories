@@ -8,50 +8,45 @@
     tools:context="com.version1.andreascrona.memories.LoginActivity">
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/usernameTxt"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="126dp" />
+        android:hint="@string/username"
+        android:layout_above="@+id/passwordTxt"
+        android:layout_centerHorizontal="true" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/passwordTxt"
-        android:layout_below="@+id/usernameTxt"
-        android:layout_alignLeft="@+id/usernameTxt"
-        android:layout_alignStart="@+id/usernameTxt"
-        android:password="true" />
+        android:password="true"
+        android:gravity="left"
+        android:hint="@string/password"
+        android:layout_above="@+id/login_btn"
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/loginBtn"
         android:id="@+id/login_btn"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="loginClick" />
+        android:onClick="loginClick"
+        android:layout_above="@+id/register_btn"
+        android:layout_alignLeft="@+id/usernameTxt"
+        android:layout_alignStart="@+id/usernameTxt" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/registerBtn"
         android:id="@+id/register_btn"
-        android:layout_marginTop="47dp"
-        android:layout_below="@+id/login_btn"
-        android:layout_centerHorizontal="true"
-        android:onClick="registerClick" />
+        android:onClick="registerClick"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/login_btn"
+        android:layout_alignStart="@+id/login_btn" />
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_alignBottom="@+id/usernameTxt"
-        android:layout_alignRight="@+id/usernameTxt"
-        android:layout_alignEnd="@+id/usernameTxt" />
 </RelativeLayout>
