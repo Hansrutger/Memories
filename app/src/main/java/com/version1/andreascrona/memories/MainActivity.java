@@ -2,6 +2,7 @@ package com.version1.andreascrona.memories;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import com.version1.andreascrona.memories.Classes.account;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -10,4 +11,5 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
 }
