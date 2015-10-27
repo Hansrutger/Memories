@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Memories</string>
+    <string name="title_activity_login">Login</string>
+    <string name="loginBtn">Login</string>
+    <string name="registerBtn">Register Here</string>
+    <string name="title_activity_register">Register</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repassword">password</string>
 </resources>

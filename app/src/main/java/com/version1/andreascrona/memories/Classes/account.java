@@ -2,7 +2,7 @@ package com.version1.andreascrona.memories.Classes;
 
 public class account {
 
-    String username, email, password;
+    public String username, email, password;
 
     public account(String _username, String _email, String _password) {
         this.username = _username;
