@@ -8,11 +8,38 @@
     tools:context="com.version1.andreascrona.memories.MainActivity"
     android:weightSum="1">
 
-    <TextView
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/vacations"
+        android:id="@+id/vacationBtn"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="113dp" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/friends"
+        android:id="@+id/friendBtn"
+        android:layout_below="@+id/vacationBtn"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchTxt"
+        android:layout_below="@+id/friendBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="57dp"
+        android:hint="@string/search"
+        android:gravity="center" />
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="True"
-        android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
+        android:text="@string/search"
+        android:id="@+id/searchBtn"
+        android:layout_below="@+id/searchTxt"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
