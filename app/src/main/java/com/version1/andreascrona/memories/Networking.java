@@ -17,7 +17,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpParams;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +37,10 @@ public class Networking extends AsyncTask{
             case "register":
                 account newAccount = (account) params[0];
                 registerAccount(newAccount);
+                break;
+            case "login":
+                AccessTokenRequest reqToken = (AccessTokenRequest) params[0];
+                logginAccount(reqToken);
                 break;
             default:
                 //logga fel
@@ -71,6 +81,54 @@ public class Networking extends AsyncTask{
     }
 
     private void logginAccount(AccessTokenRequest reqToken){
+        HttpURLConnection connection = null;
+        BufferedReader reader = null;
+
+        try{
+            URL url = new URL("http://mymemories-prod.elasticbeanstalk.com/token");
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            connection.setRequestProperty("grant_type", reqToken.grant_type);
+            connection.setRequestProperty("username", reqToken.username);
+            connection.setRequestProperty("password", reqToken.password);
+
+            connection.setUseCaches(false);
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
+
+            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+            wr.flush();
+            wr.close();
+
+            InputStream stream = connection.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(stream));
+            StringBuffer buffer = new StringBuffer();
+
+            String line = "";
+            while((line = reader.readLine()) != null){
+                buffer.append(line);
+            }
+
+        }
+        catch (MalformedURLException e ){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        finally {
+            if (connection != null){
+                connection.disconnect();
+            }
+            try{
+                reader.close();
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
+        }
 
     }
 }

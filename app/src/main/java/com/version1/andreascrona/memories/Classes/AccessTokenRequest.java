@@ -5,7 +5,7 @@ package com.version1.andreascrona.memories.Classes;
  */
 public class AccessTokenRequest {
 
-    String grant_type, username, password;
+    public String grant_type, username, password;
 
     public AccessTokenRequest(String _username, String _password){
         this.grant_type = "password";
