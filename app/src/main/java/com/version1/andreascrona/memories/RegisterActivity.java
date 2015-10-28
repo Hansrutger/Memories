@@ -52,19 +52,14 @@ public class RegisterActivity extends ActionBarActivity {
                 Button button = (Button) v;
                 ((Button)v).setText("createAccount");
                 account newAccount = new account(_username.getText().toString(), _email.getText().toString(), _password.getText().toString());
-                creatAccount(newAccount);
+                Networking n = new Networking();
+                n.execute(newAccount, "register");
             }
         }
         else{
             Toast.makeText(this, "Passwords must match", Toast.LENGTH_SHORT).show();
         }
     }
-
-    public void creatAccount(account newAccount){
-        Networking n = new Networking();
-        n.execute(newAccount, "register");
-    }
-
 }
 
 

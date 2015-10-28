@@ -15,6 +15,8 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpParams;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -50,46 +52,14 @@ public class Networking extends AsyncTask{
     }
 
     private void registerAccount(account newAccount){
-        String url = "http://mymemories-prod.elasticbeanstalk.com/api/v1/account/Register";
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpRequest request = new HttpPost(url);
-        List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-
-        postParameters.add(new BasicNameValuePair("username", newAccount.username));
-        postParameters.add(new BasicNameValuePair("email", newAccount.email));
-        postParameters.add(new BasicNameValuePair("password", newAccount.password));
-
-        BufferedReader bufferReader = null;
-        StringBuffer stringBuffer = new StringBuffer("");
-
-        try{
-            UrlEncodedFormEntity entity = new UrlEncodedFormEntity(postParameters);
-            request.setParams((HttpParams) entity);
-            HttpResponse response = httpClient.execute((HttpUriRequest) request);
-            bufferReader= new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-
-            String line ="";
-            String LineSeperator = System.getProperty("line.seperator");
-            while((line = bufferReader.readLine()) != null){
-                stringBuffer.append(line + LineSeperator);
-            }
-            bufferReader.close();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-    private void logginAccount(AccessTokenRequest reqToken){
         HttpURLConnection connection = null;
         BufferedReader reader = null;
 
         try{
-            URL url = new URL("http://mymemories-prod.elasticbeanstalk.com/token");
+            URL url = new URL("http://mymemories-prod.elasticbeanstalk.com/api/v1/account/Register");
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            connection.setRequestProperty("Content-Type", "application/json");
 
             connection.setUseCaches(false);
             connection.setDoInput(true);
@@ -97,7 +67,17 @@ public class Networking extends AsyncTask{
 
             OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
 
-            writer.write("grant_type=password&username=Adde&password=Mammaspojk");
+            JSONObject data = new JSONObject();
+            try {
+                data.put("username", newAccount.username);
+                data.put("email", newAccount.email);
+                data.put("password", newAccount.password);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            writer.write(data.toString());
             writer.close();
 
             InputStream stream = connection.getInputStream();
@@ -129,6 +109,55 @@ public class Networking extends AsyncTask{
             }
         }
 
+    }
+
+    private void logginAccount(AccessTokenRequest reqToken){
+        HttpURLConnection connection = null;
+        BufferedReader reader = null;
+
+        try{
+            URL url = new URL("http://mymemories-prod.elasticbeanstalk.com/token");
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            connection.setUseCaches(false);
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
+
+            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+
+            writer.write("grant_type=password&username="+reqToken.username+"&password="+reqToken.password);
+            writer.close();
+
+            InputStream stream = connection.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(stream));
+            StringBuffer buffer = new StringBuffer();
+
+            String line = "";
+            while((line = reader.readLine()) != null){
+                buffer.append(line);
+            }
+            System.out.println(buffer);
+
+        }
+        catch (MalformedURLException e ){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        finally {
+            if (connection != null){
+                connection.disconnect();
+            }
+            try{
+                reader.close();
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 }
 
