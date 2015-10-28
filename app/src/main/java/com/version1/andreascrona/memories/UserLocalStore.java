@@ -46,7 +46,7 @@ public class UserLocalStore {
     }
 
     public boolean getUserLoggedIn(){
-        if(userLocalDatabase.getBoolean("loggedIn", false) == true){
+        if(userLocalDatabase.getBoolean("loggedIn", false)){
             return true;
         }
         else{
@@ -57,5 +57,6 @@ public class UserLocalStore {
     public void clearUserData(){
         SharedPreferences.Editor spEditor = userLocalDatabase.edit();
         spEditor.clear();
+        spEditor.apply();
     }
 }

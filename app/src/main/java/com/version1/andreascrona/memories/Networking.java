@@ -21,6 +21,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -90,17 +91,14 @@ public class Networking extends AsyncTask{
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-            connection.setRequestProperty("grant_type", reqToken.grant_type);
-            connection.setRequestProperty("username", reqToken.username);
-            connection.setRequestProperty("password", reqToken.password);
-
             connection.setUseCaches(false);
             connection.setDoInput(true);
             connection.setDoOutput(true);
 
-            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-            wr.flush();
-            wr.close();
+            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+
+            writer.write("grant_type=password&username=Adde&password=Mammaspojk");
+            writer.close();
 
             InputStream stream = connection.getInputStream();
             reader = new BufferedReader(new InputStreamReader(stream));
@@ -110,6 +108,7 @@ public class Networking extends AsyncTask{
             while((line = reader.readLine()) != null){
                 buffer.append(line);
             }
+            System.out.println(buffer);
 
         }
         catch (MalformedURLException e ){
