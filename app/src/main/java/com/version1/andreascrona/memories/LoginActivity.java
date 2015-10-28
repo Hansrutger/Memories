@@ -53,4 +53,9 @@ public class LoginActivity extends ActionBarActivity {
         Intent newIntent = new Intent(this, RegisterActivity.class);
         startActivity(newIntent);
     }
+
+    @Override
+    public void onBackPressed(){
+
+    }
 }
