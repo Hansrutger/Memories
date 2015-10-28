@@ -1,5 +1,7 @@
 package com.version1.andreascrona.memories;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -37,67 +39,13 @@ public class LoginActivity extends ActionBarActivity {
     }
 
     public void loginClick(View v){
-        if (username.getText().toString() != null || password.getText().toString() != null){
+        if (username.getText().toString().length() != 0 || password.getText().toString().length() != 0){
             AccessTokenRequest reqToken = new AccessTokenRequest(username.getText().toString(), password.getText().toString());
-            //Networking n = new Networking();
-            //n.execute(reqToken, "login");
-
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try{
-                URL url = new URL("http://mymemories-prod.elasticbeanstalk.com/token");
-                connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-                connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
-                connection.setRequestProperty("grant_type", reqToken.grant_type);
-                connection.setRequestProperty("username", reqToken.username);
-                connection.setRequestProperty("password", reqToken.password);
-
-                connection.setUseCaches(false);
-                connection.setDoInput(true);
-                connection.setDoOutput(true);
-
-                DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-                wr.flush();
-                wr.close();
-
-                InputStream stream = connection.getInputStream();
-                reader = new BufferedReader(new InputStreamReader(stream));
-                StringBuffer buffer = new StringBuffer();
-
-                String line = "";
-                while((line = reader.readLine()) != null){
-                    buffer.append(line);
-                }
-
-            }
-            catch (MalformedURLException e ){
-                e.printStackTrace();
-            }
-            catch (IOException e){
-                e.printStackTrace();
-            }
-            finally {
-                if (connection != null){
-                    connection.disconnect();
-                }
-                try{
-                    reader.close();
-                }
-                catch(IOException e){
-                    e.printStackTrace();
-                }
-            }
+            Networking n = new Networking();
+            n.execute(reqToken, "login");
         }
         else{
-            Context con = getApplicationContext();
-            CharSequence text = "You have to fill in the textfields!";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toastMsg = Toast.makeText(con, text, duration);
-            toastMsg.show();
+            Toast.makeText(this, "Enter username and password", Toast.LENGTH_SHORT).show();
         }
     }
 

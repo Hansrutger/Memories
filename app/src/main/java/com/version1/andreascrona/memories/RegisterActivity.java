@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.version1.andreascrona.memories.Classes.account;
 
@@ -45,17 +46,7 @@ public class RegisterActivity extends ActionBarActivity {
     public void registerOnclick(View v){
         if(_password.getText().toString().equals(_repassword.getText().toString())){
             if(_username.getText().toString().length() == 0 || _email.getText().toString().length() == 0 || _password.getText().toString().length() == 0){
-                final AlertDialog passwordAlert = new AlertDialog.Builder(this).create();
-                passwordAlert.setTitle("Ooops");
-                passwordAlert.setMessage("Fill all fields");
-                passwordAlert.setButton(DialogInterface.BUTTON_POSITIVE,
-                        "OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                passwordAlert.dismiss();
-                            }
-                        });
-                passwordAlert.show();
+                Toast.makeText(this, "Enter all fields", Toast.LENGTH_SHORT).show();
             }
             else{
                 Button button = (Button) v;
@@ -65,17 +56,7 @@ public class RegisterActivity extends ActionBarActivity {
             }
         }
         else{
-            final AlertDialog passwordAlert = new AlertDialog.Builder(this).create();
-            passwordAlert.setTitle("Ooops");
-            passwordAlert.setMessage("Matching passwords plz");
-            passwordAlert.setButton(DialogInterface.BUTTON_POSITIVE,
-                    "OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            passwordAlert.dismiss();
-                        }
-                    });
-            passwordAlert.show();
+            Toast.makeText(this, "Passwords must match", Toast.LENGTH_SHORT).show();
         }
     }
 
