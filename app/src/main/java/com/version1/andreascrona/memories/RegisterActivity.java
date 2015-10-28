@@ -81,7 +81,7 @@ public class RegisterActivity extends ActionBarActivity {
 
     public void creatAccount(account newAccount){
         Networking n = new Networking();
-        n.execute(newAccount);
+        n.execute(newAccount, "register");
     }
 
 }

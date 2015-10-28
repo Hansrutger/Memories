@@ -3,6 +3,7 @@ package com.version1.andreascrona.memories;
 import android.os.AsyncTask;
 
 import com.version1.andreascrona.memories.Classes.account;
+import com.version1.andreascrona.memories.Classes.*;
 
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
@@ -26,12 +27,19 @@ import java.util.List;
 public class Networking extends AsyncTask{
     @Override
     protected Object doInBackground(Object[] params) {
-        account newAccount = (account) params[0];
-        getJSON("http://mymemories-prod.elasticbeanstalk.com/v1/account/Register", newAccount);
+        switch((String)params[1]){
+            case "register":
+                account newAccount = (account) params[0];
+                registerAccount(newAccount);
+                break;
+            default:
+                //logga fel
+        }
         return null;
     }
 
-    private void getJSON(String url, account newAccount){
+    private void registerAccount(account newAccount){
+        String url = "http://mymemories-prod.elasticbeanstalk.com/api/v1/account/Register";
         HttpClient httpClient = new DefaultHttpClient();
         HttpRequest request = new HttpPost(url);
         List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
@@ -59,6 +67,10 @@ public class Networking extends AsyncTask{
         catch(Exception e){
             e.printStackTrace();
         }
+
+    }
+
+    private void logginAccount(AccessTokenRequest reqToken){
 
     }
 }
