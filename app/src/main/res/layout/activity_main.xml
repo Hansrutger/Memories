@@ -11,7 +11,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/vacations"
+        android:text="Vacations"
         android:id="@+id/vacationBtn"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -20,7 +20,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/friends"
+        android:text="Friends"
         android:id="@+id/friendBtn"
         android:layout_below="@+id/vacationBtn"
         android:layout_centerHorizontal="true" />
@@ -32,13 +32,13 @@
         android:layout_below="@+id/friendBtn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="57dp"
-        android:hint="@string/search"
+        android:hint="Search"
         android:gravity="center" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/search"
+        android:text="Search"
         android:id="@+id/searchBtn"
         android:layout_below="@+id/searchTxt"
         android:layout_centerHorizontal="true" />
